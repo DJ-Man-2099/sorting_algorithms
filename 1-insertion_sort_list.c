@@ -14,27 +14,40 @@
 void insertion_sort_list(listint_t **list)
 {
     listint_t *new_list = *list,
-              *current = (*list)->next,
-              *old_list = *list,
-              *temp_prev,
-              *print_head = *list;
+              *to_compare = NULL,
+              *current_compare = NULL,
+              *current_list = *list;
+    size_t n = 1, i;
 
-    while (old_list != NULL)
+    if (*list != NULL)
+        current_compare = (*list)->next;
+    if (current_compare != NULL)
+        to_compare = current_compare->next;
+
+    while (current_compare != NULL)
     {
-        old_list = old_list->next;
-
-        while (new_list != NULL &&
-               new_list->next != NULL &&
-               new_list->next->n < current->n)
-            new_list = new_list->next;
-
-        temp_prev = current->prev;
-        current->prev = new_list;
-        current->next = new_list->next;
-        new_list->next = current;
-
-        print_list(print_head);
+        i = 0;
+        if (current_list->n <= current_compare->n)
+        {
+            while (i < n &&
+                   current_list != NULL &&
+                   current_list->next != NULL &&
+                   current_list->next->n < current_compare->n)
+            {
+                current_list = current_list->next;
+                i++;
+            }
+        }
+        current_compare->prev = current_list->prev;
+        current_list->next = current_compare->next;
+        current_compare->next = current_list;
+        current_list->prev = current_compare;
+        n++;
+        current_compare = to_compare;
+        current_list = new_list;
+        if (to_compare != NULL)
+            to_compare = to_compare->next;
     }
-
-    *list = new_list;
+    /*on swap only*/
+    print_list(new_list);
 }
