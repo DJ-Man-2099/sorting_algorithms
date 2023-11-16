@@ -40,7 +40,7 @@ void test_insertion_sort(void)
 {
     int original_stdout = dup(STDOUT_FILENO);
     // Redirect stdout to a file
-    freopen("output.txt", "w", stdout);
+    freopen("1-output.txt", "w", stdout);
     listint_t *list;
     int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
     size_t n = sizeof(array) / sizeof(array[0]);
@@ -55,7 +55,7 @@ void test_insertion_sort(void)
     print_list(list);
     // Redirect back
     freopen("/dev/tty", "a", stdout);
-    FILE *file = fopen("output.txt", "r");
+    FILE *file = fopen("1-output.txt", "r");
     if (file == NULL)
     {
         CU_FAIL("Failed to open file!");
