@@ -38,7 +38,6 @@ listint_t *create_listint(const int *array, size_t size)
  */
 void test_insertion_sort(void)
 {
-    int original_stdout = dup(STDOUT_FILENO);
     // Redirect stdout to a file
     freopen("1-output.txt", "w", stdout);
     listint_t *list;

@@ -12,50 +12,38 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *new_list = *list, *to_compare = NULL,
-			  *current_compare = NULL, *current_list = *list;
-	size_t n = 0, i;
+	listint_t *new_list = *list,
+			  *current_compare = NULL,
+			  *temp = NULL;
 
 	if (*list != NULL)
 		current_compare = (*list)->next;
-	if (current_compare != NULL)
-		to_compare = current_compare->next;
+	temp = *list;
 	while (current_compare != NULL)
 	{
-		if (current_compare->prev != NULL)
-			current_compare->prev->next = current_compare->next;
-		if (current_compare->next != NULL)
-			current_compare->next->prev = current_compare->prev;
-		if (current_list->n <= current_compare->n)
+		while (temp != NULL &&
+			   current_compare->n < temp->n)
 		{
-			for (i = 0; i < n && current_list != NULL &&
-						current_list->next != NULL &&
-						current_list->next->n < current_compare->n;
-				 i++)
-				current_list = current_list->next;
-			if (current_list != NULL)
+			temp->next = current_compare->next;
+			current_compare->prev = temp->prev;
+			if (temp->prev != NULL)
+				temp->prev->next = current_compare;
+			if (current_compare->next != NULL)
+				current_compare->next->prev = temp;
+			current_compare->next = temp;
+			temp->prev = current_compare;
+			if (current_compare->prev == NULL)
 			{
-				current_compare->prev = current_list;
-				if (current_list->next != NULL)
-					current_list->next->prev = current_compare;
-				current_compare->next = current_list->next;
-				current_list->next = current_compare;
+				new_list = current_compare;
+				print_list(new_list);
+				break;
 			}
-		}
-		else
-		{
-			current_compare->prev = NULL;
-			current_compare->next = new_list;
-			new_list->prev = current_compare;
-			new_list = current_compare;
-		}
-		n++;
-		current_compare = to_compare;
-		if (i < n - 1)
 			print_list(new_list);
-		current_list = new_list;
-		if (to_compare != NULL)
-			to_compare = to_compare->next;
+			current_compare = current_compare->prev;
+			temp = current_compare->prev;
+		}
+		temp = current_compare;
+		current_compare = current_compare->next;
 	}
 	*list = new_list;
 }

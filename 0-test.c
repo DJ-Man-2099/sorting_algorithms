@@ -7,7 +7,6 @@
  */
 void test_bubble_sort(void)
 {
-    int original_stdout = dup(STDOUT_FILENO);
     // Redirect stdout to a file
     freopen("0-output.txt", "w", stdout);
     int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
