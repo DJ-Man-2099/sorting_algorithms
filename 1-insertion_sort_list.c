@@ -1,51 +1,47 @@
 #include "sort.h"
+#include <stdio.h>
+
 /**
- * insertion_sort_list - Sorting function
+ * insertion_sort_list - sorts a DLL of integers in
+ * ascending order using the insertion sort
+ * algorithm
  *
- * @list: list to sort
- *
- * sorts a doubly linked list of integers
- * in ascending order
- * using the Insertion sort algorithm
- *
- * Return: void
+ * @list: doubly linked list
+ * Return: no return
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *new_list = *list,
-			  *current_compare = NULL,
-			  *temp = NULL;
+	listint_t *ptr, *tmp;
 
-	if (*list != NULL)
-		current_compare = (*list)->next;
-	if (*list == NULL || (*list)->next == NULL)
+	if (!list)
 		return;
-	temp = *list;
-	while (current_compare != NULL)
+
+	ptr = *list;
+
+	while (ptr)
 	{
-		while (temp != NULL &&
-			   current_compare->n < temp->n)
+		while (ptr->next && (ptr->n > ptr->next->n))
 		{
-			temp->next = current_compare->next;
-			current_compare->prev = temp->prev;
-			if (temp->prev != NULL)
-				temp->prev->next = current_compare;
-			if (current_compare->next != NULL)
-				current_compare->next->prev = temp;
-			current_compare->next = temp;
-			temp->prev = current_compare;
-			if (current_compare->prev == NULL)
-			{
-				new_list = current_compare;
-				print_list(new_list);
-				break;
-			}
-			print_list(new_list);
-			current_compare = current_compare->prev;
-			temp = current_compare->prev;
+			tmp = ptr->next;
+			ptr->next = tmp->next;
+			tmp->prev = ptr->prev;
+
+			if (ptr->prev)
+				ptr->prev->next = tmp;
+
+			if (tmp->next)
+				tmp->next->prev = ptr;
+
+			ptr->prev = tmp;
+			tmp->next = ptr;
+
+			if (tmp->prev)
+				ptr = tmp->prev;
+			else
+				*list = tmp;
+
+			print_list(*list);
 		}
-		temp = current_compare;
-		current_compare = current_compare->next;
+		ptr = ptr->next;
 	}
-	*list = new_list;
 }
