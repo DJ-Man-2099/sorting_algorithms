@@ -27,7 +27,7 @@ void test_bubble_sort(void)
     }
 
     // Read the contents of the file
-    char buffer[1000];
+    char *buffer = calloc(1000, sizeof(char));
     fread(buffer, 1000, 1, file);
     const char *multiLineString = "19, 48, 99, 71, 13, 52, 96, 73, 86, 7\n"
                                   "\n"
@@ -56,5 +56,6 @@ void test_bubble_sort(void)
                                   "7, 13, 19, 48, 52, 71, 73, 86, 96, 99\n";
     // Assert that the printed string is as expected
     CU_ASSERT_STRING_EQUAL(buffer, multiLineString);
+    free(buffer);
     fclose(file);
 }

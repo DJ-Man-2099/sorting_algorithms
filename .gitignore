@@ -1,0 +1,15 @@
+# tests
+0-test.c
+1-test.c
+2-test.c
+
+# main
+main.c
+
+# test header
+tests.h
+
+# outputs
+0-output.txt
+1-output.txt
+2-output.txt
