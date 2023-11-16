@@ -13,3 +13,6 @@ tests.h
 0-output.txt
 1-output.txt
 2-output.txt
+
+# executable
+test
