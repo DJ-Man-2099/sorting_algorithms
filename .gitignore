@@ -16,4 +16,6 @@ tests.h
 
 # executable
 test
+
+# mains
 0-main.c
