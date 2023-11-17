@@ -40,8 +40,8 @@ void insertion_sort_list(listint_t **list)
 				break;
 			}
 			print_list(new_list);
-			current_compare = current_compare->prev;
 			temp = current_compare->prev;
+			current_compare = temp->next;
 		}
 		temp = current_compare;
 		current_compare = current_compare->next;
