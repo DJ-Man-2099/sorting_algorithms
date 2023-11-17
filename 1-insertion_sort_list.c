@@ -16,30 +16,34 @@ void insertion_sort_list(listint_t **list)
 			  *current_compare,
 			  *temp;
 
-	if (*list == NULL)
+	if (*list == NULL || (*list)->next == NULL)
 		return;
 	temp = *list;
-	while (temp != NULL)
+	current_compare = (*list)->next;
+	while (current_compare != NULL)
 	{
-		while (temp->next != NULL &&
-			   temp->next->n < temp->n)
+		while (temp != NULL &&
+			   current_compare->n < temp->n)
 		{
-			current_compare = temp->next;
 			temp->next = current_compare->next;
 			current_compare->prev = temp->prev;
 			if (temp->prev != NULL)
 				temp->prev->next = current_compare;
 			if (current_compare->next != NULL)
 				current_compare->next->prev = temp;
-			temp->prev = current_compare;
 			current_compare->next = temp;
+			temp->prev = current_compare;
 			if (current_compare->prev == NULL)
-				new_list = current_compare;
-			else
-				temp = current_compare->prev;
-			print_list(new_list);
+			{
+				*list = current_compare;
+				print_list(*list);
+				break;
+			}
+			print_list(*list);
+			current_compare = current_compare->prev;
+			temp = current_compare->prev;
 		}
-		temp = temp->next;
+		temp = current_compare;
+		current_compare = current_compare->next;
 	}
-	*list = new_list;
 }
