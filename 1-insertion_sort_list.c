@@ -22,8 +22,8 @@ void insertion_sort_list(listint_t **list)
 	current_compare = (*list)->next;
 	while (current_compare != NULL)
 	{
-		while (
-			current_compare->n < temp->n)
+		while (temp != NULL &&
+			   current_compare->n < temp->n)
 		{
 			temp->next = current_compare->next;
 			current_compare->prev = temp->prev;
@@ -40,8 +40,8 @@ void insertion_sort_list(listint_t **list)
 				break;
 			}
 			print_list(new_list);
-			temp = current_compare;
 			current_compare = current_compare->prev;
+			temp = current_compare->prev;
 		}
 		temp = current_compare;
 		current_compare = current_compare->next;
