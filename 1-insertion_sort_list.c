@@ -49,7 +49,8 @@ void insertion_sort_list(listint_t **list)
 			current_compare = current_compare->prev;
 		}
 		temp = current_compare;
-		current_compare = current_compare->next;
+		if (current_compare != NULL)
+			current_compare = current_compare->next;
 	}
 	*list = new_list;
 }
