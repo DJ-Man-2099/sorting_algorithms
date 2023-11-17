@@ -34,13 +34,10 @@ void insertion_sort_list(listint_t **list)
 			temp->prev = current_compare;
 			current_compare->next = temp;
 			if (current_compare->prev == NULL)
-			{
 				new_list = current_compare;
-				print_list(new_list);
-				break;
-			}
+			else
+				temp = current_compare->prev;
 			print_list(new_list);
-			temp = current_compare->prev;
 		}
 		temp = temp->next;
 	}
