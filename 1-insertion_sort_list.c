@@ -27,30 +27,24 @@ void insertion_sort_list(listint_t **list)
 		{
 			temp->next = current_compare->next;
 			current_compare->prev = temp->prev;
-
 			if (temp->prev != NULL)
 				temp->prev->next = current_compare;
-
 			if (current_compare->next != NULL)
 				current_compare->next->prev = temp;
-
 			current_compare->next = temp;
 			temp->prev = current_compare;
-
 			if (current_compare->prev == NULL)
 			{
 				new_list = current_compare;
 				print_list(new_list);
 				break;
 			}
-
-			temp = current_compare->prev;
 			print_list(new_list);
 			current_compare = current_compare->prev;
+			temp = current_compare->prev;
 		}
 		temp = current_compare;
-		if (current_compare != NULL)
-			current_compare = current_compare->next;
+		current_compare = current_compare->next;
 	}
 	*list = new_list;
 }
