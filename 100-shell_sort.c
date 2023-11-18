@@ -13,8 +13,8 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t i, j, k;
-	int temp, n = 1;
+	size_t i, j, k, n = 1;
+	int temp;
 
 	if (size < 2)
 		return;
