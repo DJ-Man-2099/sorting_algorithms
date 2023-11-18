@@ -20,24 +20,3 @@ void print_list(const listint_t *list)
 	}
 	printf("\n");
 }
-/**
- * swap - List Function
- *
- * @a: 1st node
- * @b: 2nd node
- *
- * swaps a and b
- *
- * Return: void
- */
-void swap(listint_t **a, listint_t **b)
-{
-	(*a)->next = (*b)->next;
-	(*b)->prev = (*a)->prev;
-	if ((*a)->prev != NULL)
-		(*a)->prev->next = (*b);
-	if ((*b)->next != NULL)
-		(*b)->next->prev = (*a);
-	(*b)->next = (*a);
-	(*a)->prev = (*b);
-}
