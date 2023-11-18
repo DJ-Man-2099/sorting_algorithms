@@ -27,14 +27,7 @@ void insertion_sort_list(listint_t **list)
 		while (temp != NULL &&
 			   current_compare->n < temp->n)
 		{
-			temp->next = current_compare->next;
-			current_compare->prev = temp->prev;
-			if (temp->prev != NULL)
-				temp->prev->next = current_compare;
-			if (current_compare->next != NULL)
-				current_compare->next->prev = temp;
-			current_compare->next = temp;
-			temp->prev = current_compare;
+			swap(&temp, &current_compare);
 			if (current_compare->prev == NULL)
 			{
 				new_list = current_compare;

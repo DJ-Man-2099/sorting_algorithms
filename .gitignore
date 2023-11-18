@@ -4,6 +4,7 @@
 2-test.c
 3-test.c
 100-test.c
+101-test.c
 
 # main
 main.c
@@ -17,6 +18,7 @@ tests.h
 2-output.txt
 3-output.txt
 100-output.txt
+101-output.txt
 
 # executable
 test
