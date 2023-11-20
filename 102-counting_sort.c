@@ -13,10 +13,11 @@
  */
 void counting_sort(int *array, size_t size)
 {
-	int *count_array, *output_array, i, max = array[0];
+	int *count_array, *output_array, i, max;
 
-	if (size >= 2)
+	if (array != NULL && size >= 2)
 	{
+		max = array[0];
 		output_array = calloc(size, sizeof(int));
 		if (output_array == NULL)
 			return;
