@@ -43,9 +43,9 @@ listint_t *get_end(listint_t *list)
  *
  * sorts the list in the forward direction
  *
- * Return: New End of list
+ * Return: void
  */
-listint_t *cocktail_forward(listint_t **list, listint_t *start, int count)
+void cocktail_forward(listint_t **list, listint_t *start, int count)
 {
 	listint_t *temp;
 	int i;
@@ -63,9 +63,6 @@ listint_t *cocktail_forward(listint_t **list, listint_t *start, int count)
 		start = temp;
 		temp = temp->next;
 	}
-	for (i = 0; i < count; i++)
-		start = start->prev;
-	return (start);
 }
 /**
  * cocktail_reverse - Cocktail Sort Operation
@@ -75,9 +72,9 @@ listint_t *cocktail_forward(listint_t **list, listint_t *start, int count)
  *
  * sorts the list in the reverse direction
  *
- * Return: New Start of list
+ * Return: void
  */
-listint_t *cocktail_reverse(listint_t **list, listint_t *start, int count)
+void cocktail_reverse(listint_t **list, listint_t *start, int count)
 {
 	listint_t *temp;
 	int i;
@@ -95,9 +92,6 @@ listint_t *cocktail_reverse(listint_t **list, listint_t *start, int count)
 		start = temp;
 		temp = temp->prev;
 	}
-	for (i = 0; i < count; i++)
-		start = start->next;
-	return (start);
 }
 /**
  * cocktail_sort_list - Sorting function
@@ -112,20 +106,31 @@ listint_t *cocktail_reverse(listint_t **list, listint_t *start, int count)
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *forward_start,
-		*reverse_start;
-	int count = 0;
+	listint_t *forward_start, *start,
+		*reverse_start, *end;
+	int count = 0, i;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-	forward_start = *list;
-	reverse_start = get_end(*list);
+	start = *list;
+	forward_start = start;
+	end = get_end(*list);
 	while (forward_start != NULL && forward_start != reverse_start)
 	{
-		reverse_start = cocktail_forward(list, forward_start, count);
-		count++;
+		cocktail_forward(list, forward_start, count);
+
+		reverse_start = end;
+		for (i = 0; i < count; i++)
+			reverse_start = reverse_start->prev;
+
 		if (forward_start == reverse_start)
 			break;
-		forward_start = cocktail_reverse(list, reverse_start, count);
+
+		count++;
+		cocktail_reverse(list, reverse_start, count);
+
+		forward_start = start;
+		for (i = 0; i < count; i++)
+			forward_start = forward_start->next;
 	}
 }
