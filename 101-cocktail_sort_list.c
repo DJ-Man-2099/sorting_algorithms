@@ -33,7 +33,7 @@ listint_t *get_end(listint_t *list)
 	while (list->next != NULL)
 		list = list->next;
 
-	return list;
+	return (list);
 }
 /**
  * cocktail_forward - Cocktail Sort Operation
@@ -65,7 +65,7 @@ listint_t *cocktail_forward(listint_t **list, listint_t *start, int count)
 	}
 	for (i = 0; i < count; i++)
 		start = start->prev;
-	return start;
+	return (start);
 }
 /**
  * cocktail_reverse - Cocktail Sort Operation
@@ -97,7 +97,7 @@ listint_t *cocktail_reverse(listint_t **list, listint_t *start, int count)
 	}
 	for (i = 0; i < count; i++)
 		start = start->next;
-	return start;
+	return (start);
 }
 /**
  * cocktail_sort_list - Sorting function
