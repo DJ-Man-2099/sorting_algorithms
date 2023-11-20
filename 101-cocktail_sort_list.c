@@ -106,20 +106,19 @@ void cocktail_reverse(listint_t **list, listint_t *start, int count)
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *forward_start, *start,
-		*reverse_start, *end;
+	listint_t *forward_start,
+		*reverse_start;
 	int count = 0, i;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-	start = *list;
-	forward_start = start;
-	end = get_end(*list);
+	forward_start = *list;
 	while (forward_start != NULL && forward_start != reverse_start)
 	{
 		cocktail_forward(list, forward_start, count);
 
-		reverse_start = end;
+		forward_start = *list;
+		reverse_start = get_end(*list);
 		for (i = 0; i < count; i++)
 			reverse_start = reverse_start->prev;
 
@@ -129,7 +128,7 @@ void cocktail_sort_list(listint_t **list)
 		count++;
 		cocktail_reverse(list, reverse_start, count);
 
-		forward_start = start;
+		forward_start = *list;
 		for (i = 0; i < count; i++)
 			forward_start = forward_start->next;
 	}
